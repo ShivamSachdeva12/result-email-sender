@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Result Feedback Generator</title>
+  <style>
+    html{
+        height: 100vh;
+        width: 100vw;
+        background-image: url("/static/cold-email-bg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 35px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 35px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    input[type="file"] {
+      padding: 5px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 26px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    a{
+        color:black;
+    }
+    .result{
+        text-align: center;
+        font-size: 32px;
+        background-color: #e2dcdc;
+        border-radius:10px;
+        padding:16px;
+        font-family: Times New Roman;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Upload Class Result for AI Feedback</h2>
+    <form method="POST" action="/generate" enctype="multipart/form-data">
+      <label for="teacher_name">Teacher's Name:</label>
+      <input type="text" id="teacher_name" name="teacher_name" required>
+
+      <label for="school_name">School Name:</label>
+      <input type="text" id="school_name" name="school_name" required>
+
+      <label for="class_name">Class:</label>
+      <input type="text" id="class_name" name="class_name" required>
+
+      <label for="max_marks">Maximum Marks:</label>
+      <input type="number" id="max_marks" name="max_marks" value="100" required>
+
+      <label for="csv_file">Upload CSV or Excel File:</label>
+      <input type="file" name="csv_file" accept=".csv,.xlsx,.xls" required>
+
+      <button type="submit">Generate Feedback</button>
+    </form>
+  </div>
+  {% if download_link %}
+  <div style="margin-top: 20px;">
+    <h3 class="result">Emails Sent!!!</h3><br>
+    <button class="result"><a href="{{ download_link }}" download>📥 Download Excel Report</a></button>
+  </div>
+  {% endif %}
+
+</body>
+</html>
+
