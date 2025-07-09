@@ -46,6 +46,9 @@ def get_gmail_service():
     return creds
 
 def send_email(recipient_email, subject, body):
+    if os.getenv("DISABLE_EMAIL", "false").lower() == "true":
+        print(f"[DEBUG] Skipped sending email to {recipient_email} (DISABLE_EMAIL enabled)")
+        return
     service = get_gmail_service()
     message = MIMEMultipart()
     message['to'] = recipient_email
